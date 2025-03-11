@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>678</width>
-    <height>563</height>
+    <width>735</width>
+    <height>607</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,16 +40,35 @@ p, li { white-space: pre-wrap; }
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="Sair">
         <property name="minimumSize">
          <size>
-          <width>250</width>
+          <width>200</width>
           <height>100</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>250</width>
+          <width>200</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Sair</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="Login">
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>200</width>
           <height>100</height>
          </size>
         </property>
@@ -59,21 +78,21 @@ p, li { white-space: pre-wrap; }
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="Cadastrar">
         <property name="minimumSize">
          <size>
-          <width>250</width>
+          <width>200</width>
           <height>100</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>250</width>
+          <width>200</width>
           <height>100</height>
          </size>
         </property>
         <property name="text">
-         <string>Cadastro</string>
+         <string>Cadastrar</string>
         </property>
        </widget>
       </item>
@@ -86,7 +105,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>678</width>
+     <width>735</width>
      <height>26</height>
     </rect>
    </property>
