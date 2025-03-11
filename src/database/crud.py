@@ -52,3 +52,25 @@ def search_books(title_query="", author_query="", year_query="", pages_query="")
             results[book_id] = book_data
 
     return results
+
+def update_book(book_id, title, author, pages, year):
+    try:
+        db.child("books").child(book_id).update({
+            "title": title,
+            "author": author,
+            "pages": pages,
+            "year": year
+        })
+        return True
+    except Exception as e:
+        print(f"Erro ao atualizar livro: {e}")
+        return False
+
+
+def delete_book(book_id):
+    try:
+        db.child("books").child(book_id).remove()
+        return True
+    except Exception as e:
+        print(f"Erro ao excluir livro: {e}")
+        return False

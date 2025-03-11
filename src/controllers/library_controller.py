@@ -1,5 +1,5 @@
-from src.database.crud import add_book, get_books, search_books
-from PyQt5.QtWidgets import QMessageBox, QWidget, QLabel, QPushButton, QListWidgetItem, QHBoxLayout, QVBoxLayout
+from src.database.crud import add_book, get_books, search_books, update_book, delete_book
+from PyQt5.QtWidgets import QMessageBox, QWidget, QLabel, QPushButton, QListWidgetItem, QHBoxLayout, QVBoxLayout, QInputDialog
 from PyQt5.QtCore import QSize
 
 
@@ -55,13 +55,11 @@ class LibraryController:
         Popula a lista de livros com botões de edição e exclusão.
         """
         for book_id, book_data in books.items():
-            # Criando o widget que conterá as informações e os botões
             book_widget = QWidget()
-            main_layout = QVBoxLayout()  # Layout vertical para melhor espaçamento
-            info_layout = QVBoxLayout()  # Layout separado para os textos
-            buttons_layout = QHBoxLayout()  # Layout horizontal para os botões
+            main_layout = QVBoxLayout()
+            info_layout = QVBoxLayout()
+            buttons_layout = QHBoxLayout()
             
-            # Rótulo com informações do livro
             book_info = QLabel(
                 f"Título: {book_data['title']}\n"
                 f"Autor: {book_data['author']}\n"
@@ -69,15 +67,12 @@ class LibraryController:
                 f"Páginas: {book_data['pages']}"
             )
 
-            # Botão de editar
             edit_button = QPushButton("✏️ Editar")
             edit_button.clicked.connect(lambda _, bid=book_id: self.edit_book(bid))
 
-            # Botão de excluir
             delete_button = QPushButton("🗑️ Excluir")
             delete_button.clicked.connect(lambda _, bid=book_id: self.delete_book(bid))
 
-            # Adiciona os elementos aos layouts
             info_layout.addWidget(book_info)
             buttons_layout.addWidget(edit_button)
             buttons_layout.addWidget(delete_button)
@@ -87,10 +82,47 @@ class LibraryController:
 
             book_widget.setLayout(main_layout)
 
-            # Adiciona ao QListWidget
             item = QListWidgetItem(self.main.searchBooksWindow.listWidget)
-            altura = book_widget.sizeHint().height() + 20  # Ajuste fino para evitar cortes
+            altura = book_widget.sizeHint().height() + 20
             largura = book_widget.sizeHint().width()
             item.setSizeHint(QSize(largura, altura))
             self.main.searchBooksWindow.listWidget.addItem(item)
             self.main.searchBooksWindow.listWidget.setItemWidget(item, book_widget)
+
+    
+    def edit_book(self, book_id):
+        """
+        Edita um livro existente.
+        """
+        books = get_books()
+        book_data = books.get(book_id, None)
+
+        if not book_data:
+            QMessageBox.warning(None, 'Erro', 'Não foi possível carregar os dados atualizados do livro.')
+            return
+        new_title, ok1 = QInputDialog.getText(None, "Editar Livro", "Novo título:", text=book_data['title'])
+        new_author, ok2 = QInputDialog.getText(None, "Editar Livro", "Novo autor:", text=book_data['author'])
+        new_year, ok3 = QInputDialog.getText(None, "Editar Livro", "Novo ano de publicação:", text=book_data['year'])
+        new_pages, ok4 = QInputDialog.getText(None, "Editar Livro", "Nova quantidade de páginas:", text=book_data['pages'])
+
+        if ok1 and ok2 and ok3 and ok4:
+            success = update_book(book_id, new_title, new_author, new_pages, new_year)
+            if success:
+                QMessageBox.information(None, 'Sucesso', 'Livro atualizado com sucesso')
+                self.load_books()
+            else:
+                QMessageBox.warning(None, 'Erro', 'Erro ao atualizar livro')
+
+    def delete_book(self, book_id):
+        """
+        Exclui um livro do Firebase.
+        """
+        reply = QMessageBox.question(None, 'Confirmar Exclusão', 'Tem certeza que deseja excluir este livro?',
+                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            success = delete_book(book_id)
+            if success:
+                QMessageBox.information(None, 'Sucesso', 'Livro excluído com sucesso')
+                self.load_books()
+            else:
+                QMessageBox.warning(None, 'Erro', 'Erro ao excluir livro')
