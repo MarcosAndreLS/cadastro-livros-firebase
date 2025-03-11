@@ -11,7 +11,7 @@ firebaseConfig = {
   'databaseURL': "https://cadastro-livros-firebase-default-rtdb.firebaseio.com"
 };
 
-firebase=pyrebase.initialize_app(firebaseConfig)
+firebase = pyrebase.initialize_app(firebaseConfig)
 
-auth=firebase.auth()
+auth = firebase.auth()
 db = firebase.database()

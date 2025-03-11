@@ -76,45 +76,20 @@ p, li { white-space: pre-wrap; }
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QPushButton" name="editar">
-        <property name="minimumSize">
-         <size>
-          <width>190</width>
-          <height>100</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>190</width>
-          <height>100</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Editar Livro</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QPushButton" name="excluir">
-        <property name="minimumSize">
-         <size>
-          <width>190</width>
-          <height>100</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>190</width>
-          <height>100</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Excluir Livro</string>
-        </property>
-       </widget>
-      </item>
      </layout>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
