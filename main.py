@@ -6,6 +6,7 @@ from src.gui.login_window import Login_window
 from src.gui.sign_up_window import Sign_up_window
 from src.gui.library import Library_window
 from src.gui.sign_up_books import Sign_up_books_window
+from src.gui.search_books_window import Search_books_window
 from src.controllers.login_user_controller import LoginController
 from src.controllers.signup_user_controller import SignupController
 from src.controllers.library_controller import LibraryController
@@ -27,6 +28,7 @@ class Ui_Main(QtWidgets.QWidget):
         self.stack2 = QtWidgets.QMainWindow()
         self.stack3 = QtWidgets.QMainWindow()
         self.stack4 = QtWidgets.QMainWindow()
+        self.stack5 = QtWidgets.QMainWindow()
 
         self.mainWindow = Main_window()
         self.mainWindow.setupUi(self.stack0)
@@ -43,11 +45,15 @@ class Ui_Main(QtWidgets.QWidget):
         self.signupBooksWindow = Sign_up_books_window()
         self.signupBooksWindow.setupUi(self.stack4)
 
+        self.searchBooksWindow = Search_books_window()
+        self.searchBooksWindow.setupUi(self.stack5)
+
         self.QtStack.addWidget(self.stack0)
         self.QtStack.addWidget(self.stack1)
         self.QtStack.addWidget(self.stack2)
         self.QtStack.addWidget(self.stack3)
         self.QtStack.addWidget(self.stack4)
+        self.QtStack.addWidget(self.stack5)
 
 
 class Main(QMainWindow, Ui_Main):
@@ -65,7 +71,9 @@ class Main(QMainWindow, Ui_Main):
         self.loginWindow.voltar.clicked.connect(self.voltar_main_window)
         self.signupWindow.voltar.clicked.connect(self.voltar_main_window)
         self.libraryWindow.cadastrar.clicked.connect(self.abrirCadastroLivro)
+        self.libraryWindow.pesquisar.clicked.connect(self.abrirPesquisarLivro)
         self.signupBooksWindow.voltar_2.clicked.connect(self.voltar_library)
+        self.searchBooksWindow.voltar_2.clicked.connect(self.voltar_library)
 
     def fecharPrograma(self):
         sys.exit(app.exec_())
@@ -78,6 +86,10 @@ class Main(QMainWindow, Ui_Main):
     
     def voltar_library(self):
         self.QtStack.setCurrentIndex(3)
+
+    def abrirPesquisarLivro(self):
+        self.QtStack.setCurrentIndex(5)
+        self.library_controller.load_books()
 
     def abrirCadastroLivro(self):
         self.QtStack.setCurrentIndex(4)
