@@ -26,11 +26,6 @@ class Sign_up_window(object):
 "border: none;")
         self.textBrowser.setObjectName("textBrowser")
         self.verticalLayout.addWidget(self.textBrowser)
-        self.senhas_diferentes = QtWidgets.QLabel(self.centralwidget)
-        self.senhas_diferentes.setStyleSheet("font-size: 12pt;\n"
-"color: rgb(255, 0, 0);")
-        self.senhas_diferentes.setObjectName("senhas_diferentes")
-        self.verticalLayout.addWidget(self.senhas_diferentes)
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
@@ -125,7 +120,6 @@ class Sign_up_window(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:28pt; color:#55007f;\">Cadastrar</span></p></body></html>"))
-        self.senhas_diferentes.setText(_translate("MainWindow", "As senhas não são iguais!"))
         self.label_5.setText(_translate("MainWindow", "E-mail:"))
         self.label_6.setText(_translate("MainWindow", "Senha:"))
         self.label_4.setText(_translate("MainWindow", "Confirmar senha:"))

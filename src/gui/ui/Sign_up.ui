@@ -40,17 +40,6 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="senhas_diferentes">
-      <property name="styleSheet">
-       <string notr="true">font-size: 12pt;
-color: rgb(255, 0, 0);</string>
-      </property>
-      <property name="text">
-       <string>As senhas não são iguais!</string>
-      </property>
-     </widget>
-    </item>
-    <item>
      <layout class="QHBoxLayout" name="horizontalLayout_6">
       <item>
        <widget class="QLabel" name="label_5">

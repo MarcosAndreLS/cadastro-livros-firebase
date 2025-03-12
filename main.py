@@ -72,6 +72,7 @@ class Main(QMainWindow, Ui_Main):
         self.signupWindow.voltar.clicked.connect(self.voltar_main_window)
         self.libraryWindow.cadastrar.clicked.connect(self.abrirCadastroLivro)
         self.libraryWindow.pesquisar.clicked.connect(self.abrirPesquisarLivro)
+        self.libraryWindow.sair.clicked.connect(self.voltar_main_window)
         self.signupBooksWindow.voltar_2.clicked.connect(self.voltar_library)
         self.searchBooksWindow.voltar_2.clicked.connect(self.voltar_library)
 
@@ -95,8 +96,7 @@ class Main(QMainWindow, Ui_Main):
         self.QtStack.setCurrentIndex(4)
 
     def voltar_main_window(self):
-        self.QtStack.setCurrentIndex(0)
-    
+        self.QtStack.setCurrentIndex(0)  
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)

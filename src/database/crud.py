@@ -11,7 +11,7 @@ def add_book(title, author, pages, year):
             "pages": pages,
             "year": year
         }
-        db.child("books").push(book_data)
+        db.child("books").set(book_data)
         return True
     except Exception as e:
         print(f"Erro ao adicionar livro: {str(e)}")

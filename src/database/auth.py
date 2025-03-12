@@ -1,4 +1,6 @@
 from src.database.firebase_config import db
+from src.database.firebase_config import auth
+
 
 def authenticate_user(email, password):
     """
@@ -9,18 +11,19 @@ def authenticate_user(email, password):
     :return: True se o login for bem-sucedido, False caso contrário
     """
     try:
-        users = db.child("users").get().val()  # Obtém todos os usuários cadastrados
-
-        if users:
-            for user_id, user_data in users.items():
-                if user_data.get('email') == email and user_data.get('password') == password:
-                    return True  # Usuário autenticado com sucesso
-
-        return False  # Credenciais incorretas
-
+        user = auth.sign_in_with_email_and_password(email, password)
+        return "SUCCESS"  # Credenciais incorretas
     except Exception as e:
-        print(f"Erro ao autenticar usuário: {str(e)}")
-        return False
+        error_message = str(e)
+
+        if "INVALID_EMAIL" in error_message:
+            return "EMAIL_INVÁLIDO"
+        elif "MISSING_PASSWORD" in error_message:
+            return "SENHA_AUSENTE"
+        elif "INVALID_LOGIN_CREDENTIALS" in error_message:
+            return "SENHA_INVÁLIDA"
+        else:
+            return "ERRO_DESCONHECIDO"
 
 
 def create_user(email, password):
@@ -32,12 +35,20 @@ def create_user(email, password):
     :return: True se o usuário for criado com sucesso, False caso contrário
     """
     try:
-        db.child("users").push({
-            "email": email,
-            "password": password  # Senha deve ser criptografada em produção
-        })
-
-        return True  # Conta criada com sucesso
+        user = auth.create_user_with_email_and_password(email, password)
+        return "SUCCESS"  # Conta criada com sucesso
     except Exception as e:
-        print(f"Erro ao criar conta: {str(e)}")
-        return False
+        error_message = str(e)
+
+        if "INVALID_EMAIL" in error_message:
+            return "EMAIL_INVÁLIDO"
+        elif "EMAIL_EXISTS" in error_message:
+            return "EMAIL_JÁ_CADASTRADO"
+        elif "WEAK_PASSWORD" in error_message:
+            return "SENHA_FRACA"
+        elif "MISSING_PASSWORD" in error_message:
+            return "SENHA_AUSENTE"
+        elif "MISSING_EMAIL" in error_message:
+            return "EMAIL_AUSENTE"
+        else:
+            return "ERRO_DESCONHECIDO"

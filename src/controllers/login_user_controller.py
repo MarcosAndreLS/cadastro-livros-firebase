@@ -1,4 +1,6 @@
 from src.database.auth import authenticate_user
+from PyQt5.QtWidgets import QMessageBox
+
 
 class LoginController:
     def __init__(self, main):
@@ -9,11 +11,19 @@ class LoginController:
         email = self.main.loginWindow.line_email.text()
         password = self.main.loginWindow.line_senha.text()
 
-        if authenticate_user(email, password):
-            print(f"Login bem-sucedido! Bem-vindo, {email}")
+        result = authenticate_user(email, password)
+        
+        if result == "SUCCESS":
             self.main.QtStack.setCurrentIndex(3)  # Redireciona para a tela principal
+            QMessageBox.information(None, 'Sucesso', f'Login bem-sucedido! Bem-vindo, {email}')
+        elif result == "EMAIL_INVÁLIDO":
+            QMessageBox.warning(None, 'Erro', 'Por favor, digite um email')
+        elif result == "SENHA_AUSENTE":
+            QMessageBox.warning(None, 'Erro', 'Por favor, digite uma senha.')
+        elif result == "SENHA_INVÁLIDA":
+            QMessageBox.warning(None, 'Erro', 'Senha incorreta!')  
         else:
-            print("Erro: Usuário ou senha incorretos!")
+            QMessageBox.critical(None, 'Erro', 'Ocorreu um erro desconhecido')
         # try:
         #     users = db.child("users").get().val()  # Obtém todos os usuários cadastrados
 
