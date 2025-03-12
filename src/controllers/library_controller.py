@@ -19,14 +19,17 @@ class LibraryController:
         pages = self.main.signupBooksWindow.line_Qpaginas.text()
         year = self.main.signupBooksWindow.line_publicacao.text()
 
-        if add_book(title, author, pages, year):
-            QMessageBox.information(None, 'Sucesso', 'Livro adicionado com sucesso')
-            self.main.signupBooksWindow.line_titulo.setText('')
-            self.main.signupBooksWindow.line_autor.setText('')
-            self.main.signupBooksWindow.line_Qpaginas.setText('')
-            self.main.signupBooksWindow.line_publicacao.setText('')
+        if not (title == '' or author == '' or pages == '' or year == ''):
+            if add_book(title, author, pages, year):
+                QMessageBox.information(None, 'Sucesso', 'Livro adicionado com sucesso')
+                self.main.signupBooksWindow.line_titulo.setText('')
+                self.main.signupBooksWindow.line_autor.setText('')
+                self.main.signupBooksWindow.line_Qpaginas.setText('')
+                self.main.signupBooksWindow.line_publicacao.setText('')
+            else:
+                QMessageBox.warning(None, 'Erro', 'Erro ao adiconar livro')
         else:
-            QMessageBox.information(None, 'Erro', 'Erro ao adiconar livro')
+            QMessageBox.warning(None, 'Erro', 'Todos os dados devem estar preenchidos!')
 
     def load_books(self):
         """
