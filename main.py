@@ -67,36 +67,37 @@ class Main(QMainWindow, Ui_Main):
 
         self.mainWindow.Sair.clicked.connect(self.fecharPrograma)
         self.mainWindow.Login.clicked.connect(self.abrirLogin)
-        self.mainWindow.Cadastrar.clicked.connect(self.abrirCadastro)
-        self.loginWindow.voltar.clicked.connect(self.voltar_main_window)
-        self.signupWindow.voltar.clicked.connect(self.voltar_main_window)
+        self.mainWindow.Cadastrar.clicked.connect(self.abrirCadastroUser)
+        self.loginWindow.voltar.clicked.connect(self.abrirMainWindow)
+        self.signupWindow.voltar.clicked.connect(self.abrirMainWindow)
         self.libraryWindow.cadastrar.clicked.connect(self.abrirCadastroLivro)
         self.libraryWindow.pesquisar.clicked.connect(self.abrirPesquisarLivro)
-        self.libraryWindow.sair.clicked.connect(self.voltar_main_window)
-        self.signupBooksWindow.voltar_2.clicked.connect(self.voltar_library)
-        self.searchBooksWindow.voltar_2.clicked.connect(self.voltar_library)
+        self.libraryWindow.sair.clicked.connect(self.abrirMainWindow)
+        self.signupBooksWindow.voltar_2.clicked.connect(self.abrirLibrary)
+        self.searchBooksWindow.voltar_2.clicked.connect(self.abrirLibrary)
 
     def fecharPrograma(self):
         sys.exit(app.exec_())
 
+    def abrirMainWindow(self):
+        self.QtStack.setCurrentIndex(0)
+
     def abrirLogin(self):
         self.QtStack.setCurrentIndex(1)
-    
-    def abrirCadastro(self):
+
+    def abrirCadastroUser(self):
         self.QtStack.setCurrentIndex(2)
-    
-    def voltar_library(self):
+
+    def abrirLibrary(self):
         self.QtStack.setCurrentIndex(3)
+
+    def abrirCadastroLivro(self):
+        self.QtStack.setCurrentIndex(4)
 
     def abrirPesquisarLivro(self):
         self.QtStack.setCurrentIndex(5)
         self.library_controller.load_books()
 
-    def abrirCadastroLivro(self):
-        self.QtStack.setCurrentIndex(4)
-
-    def voltar_main_window(self):
-        self.QtStack.setCurrentIndex(0)  
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
