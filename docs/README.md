@@ -1,7 +1,27 @@
 # cadastro-livros-firebase
 
+## Sobre o projeto
 
-### Baixando e acessando o repositório
+O projeto tem como objetivo implementar um sistema de cadastro de livros da biblioteca utilizando Python com interface gráfica (GUI) e armazenamento no Firebase.
+
+### 📋 Requisitos Funcionais:
+
+O sistema deve permitir as operações CRUD nos seguintes campos:
+- Título do livro
+- Autor principal
+- Quantidade de páginas
+- Ano de publicação
+
+### ⚙ Requisitos Técnicos:
+
+- A interface gráfica deve ser implementada com (Tkinter ou PyQt).
+- O Firebase deve ser utilizado tanto para armazenamento dos livros quanto para autenticação do usuário.
+- A autenticação pode ser feita via email/senha.
+- O banco de dados pode ser Firestore ou Realtime Database.
+- Implementar mensagens de erro/sucesso para operações do CRUD.
+- As operações CRUD devem refletir as alterações no Firebase e ser demonstradas na apresentação do projeto.
+
+### Clonando e acessando o repositório
 ```bash
 git clone https://github.com/MarcosAndreLS/cadastro-livros-firebase.git
 cd cadastro-livros-firebase
@@ -9,7 +29,7 @@ cd cadastro-livros-firebase
 
 ### Instalando as dependências
 ```bash
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 ### Estrutura do projeto
@@ -49,6 +69,22 @@ cadastro-livros-firebase/
 ```bash
 python main.py
 ```
+
+### Tecnologias utilizadas
+
+- `Firebase`
+    - `Realtime Database`
+    - `Authentication`
+- `PyQt5`
+
+#### Realtime Database
+
+<img src="../images/url-image-books.png"/>
+
+#### Authentication
+
+<img src="../images/autenticacao.png"/>
+
 ### Prints da interface
 
 ![Tela Principal](https://github.com/user-attachments/assets/26e31e67-edd3-4b76-abc3-208d4db4532a)
