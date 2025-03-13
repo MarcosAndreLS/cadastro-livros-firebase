@@ -5,7 +5,6 @@ from PyQt5.QtWidgets import QMessageBox
 class LoginController:
     def __init__(self, main):
         self.main = main
-        self.main.loginWindow.logar.clicked.connect(self.login_function)
 
     def login_function(self):
         email = self.main.loginWindow.line_email.text()

@@ -5,29 +5,29 @@ from PyQt5.QtCore import QSize
 
 class LibraryController:
     def __init__(self, main):
-        self.main = main #isso pode estar deixando a aplicação lenta para abrir
-
-        self.main.signupBooksWindow.cadastrar.clicked.connect(self.add_book)
-        self.main.searchBooksWindow.buscar.clicked.connect(self.search_books)
+        self.main = main
 
     def add_book(self):
         """
         Obtém os dados da interface e adiciona um livro no Firebase.
         """
-        title = self.main.signupBooksWindow.line_titulo.text()
-        author = self.main.signupBooksWindow.line_autor.text()
-        pages = self.main.signupBooksWindow.line_Qpaginas.text()
-        year = self.main.signupBooksWindow.line_publicacao.text()
+        title = self.main.signupBooksWindow.line_titulo.text().strip()
+        author = self.main.signupBooksWindow.line_autor.text().strip()
+        pages = self.main.signupBooksWindow.line_Qpaginas.text().strip()
+        year = self.main.signupBooksWindow.line_publicacao.text().strip()
 
         if not (title == '' or author == '' or pages == '' or year == ''):
-            if add_book(title, author, pages, year):
-                QMessageBox.information(None, 'Sucesso', 'Livro adicionado com sucesso')
-                self.main.signupBooksWindow.line_titulo.setText('')
-                self.main.signupBooksWindow.line_autor.setText('')
-                self.main.signupBooksWindow.line_Qpaginas.setText('')
-                self.main.signupBooksWindow.line_publicacao.setText('')
+            if pages.isdigit() and year.isdigit():
+                if add_book(title, author, int(pages), int(year)):
+                    QMessageBox.information(None, 'Sucesso', 'Livro adicionado com sucesso')
+                    self.main.signupBooksWindow.line_titulo.setText('')
+                    self.main.signupBooksWindow.line_autor.setText('')
+                    self.main.signupBooksWindow.line_Qpaginas.setText('')
+                    self.main.signupBooksWindow.line_publicacao.setText('')
+                else:
+                    QMessageBox.warning(None, 'Erro', 'Erro ao adiconar livro')
             else:
-                QMessageBox.warning(None, 'Erro', 'Erro ao adiconar livro')
+                QMessageBox.warning(None, 'Erro', 'Os campos "Ano" e "Quantidade de Páginas" devem conter apenas números inteiros.')
         else:
             QMessageBox.warning(None, 'Erro', 'Todos os dados devem estar preenchidos!')
 
@@ -105,16 +105,19 @@ class LibraryController:
             return
         new_title, ok1 = QInputDialog.getText(None, "Editar Livro", "Novo título:", text=book_data['title'])
         new_author, ok2 = QInputDialog.getText(None, "Editar Livro", "Novo autor:", text=book_data['author'])
-        new_year, ok3 = QInputDialog.getText(None, "Editar Livro", "Novo ano de publicação:", text=book_data['year'])
-        new_pages, ok4 = QInputDialog.getText(None, "Editar Livro", "Nova quantidade de páginas:", text=book_data['pages'])
+        new_year, ok3 = QInputDialog.getText(None, "Editar Livro", "Novo ano de publicação:", text=str(book_data['year']))
+        new_pages, ok4 = QInputDialog.getText(None, "Editar Livro", "Nova quantidade de páginas:", text=str(book_data['pages']))
 
-        if ok1 and ok2 and ok3 and ok4:
-            success = update_book(book_id, new_title, new_author, new_pages, new_year)
-            if success:
-                QMessageBox.information(None, 'Sucesso', 'Livro atualizado com sucesso')
-                self.load_books()
-            else:
-                QMessageBox.warning(None, 'Erro', 'Erro ao atualizar livro')
+        if new_year.isdigit() and new_pages.isdigit():
+            if ok1 and ok2 and ok3 and ok4:
+                success = update_book(book_id, new_title, new_author, new_pages, new_year)
+                if success:
+                    QMessageBox.information(None, 'Sucesso', 'Livro atualizado com sucesso')
+                    self.load_books()
+                else:
+                    QMessageBox.warning(None, 'Erro', 'Erro ao atualizar livro')
+        else:
+            QMessageBox.warning(None, 'Erro', 'Os campos "Ano" e "Quantidade de Páginas" devem conter apenas números inteiros.')
 
     def delete_book(self, book_id):
         """

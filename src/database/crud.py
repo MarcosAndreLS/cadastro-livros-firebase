@@ -8,10 +8,10 @@ def add_book(title, author, pages, year):
         book_data = {
             "title": title,
             "author": author,
-            "pages": pages,
-            "year": year
+            "pages": int(pages),
+            "year": int(year)
         }
-        db.child("books").set(book_data)
+        db.child("books").push(book_data)
         return True
     except Exception as e:
         print(f"Erro ao adicionar livro: {str(e)}")
@@ -58,8 +58,8 @@ def update_book(book_id, title, author, pages, year):
         db.child("books").child(book_id).update({
             "title": title,
             "author": author,
-            "pages": pages,
-            "year": year
+            "pages": int(pages),
+            "year": int(year)
         })
         return True
     except Exception as e:

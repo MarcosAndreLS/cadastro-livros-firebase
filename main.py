@@ -75,6 +75,10 @@ class Main(QMainWindow, Ui_Main):
         self.libraryWindow.sair.clicked.connect(self.abrirMainWindow)
         self.signupBooksWindow.voltar_2.clicked.connect(self.abrirLibrary)
         self.searchBooksWindow.voltar_2.clicked.connect(self.abrirLibrary)
+        self.loginWindow.logar.clicked.connect(self.login_controller.login_function)
+        self.signupWindow.finalizar.clicked.connect(self.signup_controller.create_acc_function)
+        self.signupBooksWindow.cadastrar.clicked.connect(self.library_controller.add_book)
+        self.searchBooksWindow.buscar.clicked.connect(self.library_controller.search_books)
 
     def fecharPrograma(self):
         sys.exit(app.exec_())

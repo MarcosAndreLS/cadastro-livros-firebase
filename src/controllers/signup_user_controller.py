@@ -1,10 +1,11 @@
 from src.database.auth import create_user
 from PyQt5.QtWidgets import QMessageBox
 
+
 class SignupController:
     def __init__(self, main):
         self.main = main
-        self.main.signupWindow.finalizar.clicked.connect(self.create_acc_function)
+
     def create_acc_function(self):
         email = self.main.signupWindow.line_email.text()
         password = self.main.signupWindow.line_senha.text()
