@@ -26,9 +26,9 @@ def get_books():
         start_time = time.time()  # Captura o tempo inicial
         books = db.child("books").get().val()
         end_time = time.time()  # Captura o tempo final
-        
+   
         elapsed_time = end_time - start_time  # Calcula o tempo decorrido
-        
+
         return {
             "books": books if books else {},
             "query_time": elapsed_time  # Tempo da consulta em segundos
@@ -40,30 +40,6 @@ def get_books():
             "query_time": None  # Indica falha na consulta
         }
 
-def search_books(title_query="", author_query="", year_query="", pages_query=""):
-    """
-    Filtra os livros dinamicamente com base nos campos preenchidos.
-    """
-    books = get_books()
-    results = {}
-
-    for book_id, book_data in books.items():
-        title = str(book_data.get("title", "")).strip().lower()
-        author = str(book_data.get("author", "")).strip().lower()
-        year = str(book_data.get("year", "")).strip()
-        pages = str(book_data.get("pages", "")).strip()
-
-        matches = (
-            (not title_query or title_query in title) and
-            (not author_query or author_query in author) and
-            (not year_query or year_query == year) and
-            (not pages_query or pages_query == pages)
-        )
-
-        if matches:
-            results[book_id] = book_data
-
-    return results
 
 def update_book(book_id, title, author, pages, year):
     try:

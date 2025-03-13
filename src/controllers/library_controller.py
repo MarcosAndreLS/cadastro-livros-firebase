@@ -1,4 +1,4 @@
-from src.database.crud import add_book, get_books, search_books, update_book, delete_book
+from src.database.crud import add_book, get_books, update_book, delete_book
 from PyQt5.QtWidgets import QMessageBox, QWidget, QLabel, QPushButton, QListWidgetItem, QHBoxLayout, QVBoxLayout, QInputDialog
 from PyQt5.QtCore import QSize
 
@@ -18,6 +18,18 @@ class LibraryController:
 
         if not (title == '' or author == '' or pages == '' or year == ''):
             if pages.isdigit() and year.isdigit():
+                books_data = get_books()
+                books = books_data.get("books", {})  # Evita erro caso a chave não exista
+
+                for book_id, book_data in books.items():
+                    if (
+                        book_data.get("title", "").strip().lower() == title.lower() and
+                        book_data.get("author", "").strip().lower() == author.lower() and
+                        str(book_data.get("pages", "")).strip() == str(pages) and
+                        str(book_data.get("year", "")).strip() == str(year)
+                    ):
+                        QMessageBox.warning(None, 'Erro', 'Este livro já está cadastrado.')
+                        return
                 if add_book(title, author, int(pages), int(year)):
                     QMessageBox.information(None, 'Sucesso', 'Livro adicionado com sucesso')
                     self.main.signupBooksWindow.line_titulo.setText('')
@@ -46,15 +58,32 @@ class LibraryController:
     
     def search_books(self):
         """
-        Realiza uma pesquisa dinâmica com base nos campos preenchidos.
+        Realiza a pesquisa diretamente no controller com base nos campos preenchidos.
         """
         title_query = self.main.searchBooksWindow.line_titulo.text().strip().lower()
         author_query = self.main.searchBooksWindow.line_autor.text().strip().lower()
         year_query = self.main.searchBooksWindow.line_publicacao.text().strip()
         pages_query = self.main.searchBooksWindow.line_Qpaginas.text().strip()
 
-        results = search_books(title_query, author_query, year_query, pages_query)
-    
+        books_data = get_books()  # Busca todos os livros do Firebase
+        books = books_data.get("books", {})
+
+        results = {}
+
+        for book_id, book_data in books.items():
+            title = str(book_data.get("title", "")).strip().lower()
+            author = str(book_data.get("author", "")).strip().lower()
+            year = str(book_data.get("year", "")).strip()
+            pages = str(book_data.get("pages", "")).strip()
+
+            if (
+                (not title_query or title_query in title) and
+                (not author_query or author_query in author) and
+                (not year_query or year_query == year) and
+                (not pages_query or pages_query == pages)
+            ):
+                results[book_id] = book_data
+
         self.main.searchBooksWindow.listWidget.clear()
         self._populate_book_list(results)
     

@@ -39,7 +39,7 @@ def create_user(email, password):
         return "SUCCESS"  # Conta criada com sucesso
     except Exception as e:
         error_message = str(e)
-
+        print(error_message)
         if "INVALID_EMAIL" in error_message:
             return "EMAIL_INVÁLIDO"
         elif "EMAIL_EXISTS" in error_message:
