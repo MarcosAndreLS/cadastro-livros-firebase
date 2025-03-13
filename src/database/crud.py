@@ -1,4 +1,5 @@
 from src.database.firebase_config import db
+import time
 
 def add_book(title, author, pages, year):
     """
@@ -19,14 +20,25 @@ def add_book(title, author, pages, year):
 
 def get_books():
     """
-    Retorna todos os livros cadastrados no Firebase.
+    Retorna todos os livros cadastrados no Firebase e o tempo de consulta.
     """
     try:
+        start_time = time.time()  # Captura o tempo inicial
         books = db.child("books").get().val()
-        return books if books else {}
+        end_time = time.time()  # Captura o tempo final
+        
+        elapsed_time = end_time - start_time  # Calcula o tempo decorrido
+        
+        return {
+            "books": books if books else {},
+            "query_time": elapsed_time  # Tempo da consulta em segundos
+        }
     except Exception as e:
         print(f"Erro ao buscar livros: {str(e)}")
-        return {}
+        return {
+            "books": {},
+            "query_time": None  # Indica falha na consulta
+        }
 
 def search_books(title_query="", author_query="", year_query="", pages_query=""):
     """

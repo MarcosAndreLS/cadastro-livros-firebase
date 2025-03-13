@@ -35,7 +35,12 @@ class LibraryController:
         """
         Carrega os livros na interface com rolagem e adiciona botões de edição e exclusão.
         """
-        books = get_books()
+        books_data = get_books()  # Obtém os livros e o tempo da consulta
+        books = books_data.get("books", {})
+        query_time = books_data.get("query_time", None)
+
+        # Limpa a lista antes de adicionar os novos livros
+        QMessageBox.information(None, 'Sucesso', f'A consulta para carregar todos os livros levou {query_time:.4f} segundos.')
         self.main.searchBooksWindow.listWidget.clear()
         self._populate_book_list(books)
     

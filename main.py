@@ -112,8 +112,8 @@ class Main(QMainWindow, Ui_Main):
         self.searchBooksWindow.line_autor.setText('')
         self.searchBooksWindow.line_Qpaginas.setText('')
         self.searchBooksWindow.line_publicacao.setText('')
-        self.QtStack.setCurrentIndex(5)
         self.library_controller.load_books()
+        self.QtStack.setCurrentIndex(5)
 
 
 if __name__ == '__main__':
