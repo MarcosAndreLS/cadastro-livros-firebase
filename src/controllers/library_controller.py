@@ -103,19 +103,36 @@ class LibraryController:
         if not book_data:
             QMessageBox.warning(None, 'Erro', 'Não foi possível carregar os dados atualizados do livro.')
             return
-        new_title, ok1 = QInputDialog.getText(None, "Editar Livro", "Novo título:", text=book_data['title'])
-        new_author, ok2 = QInputDialog.getText(None, "Editar Livro", "Novo autor:", text=book_data['author'])
-        new_year, ok3 = QInputDialog.getText(None, "Editar Livro", "Novo ano de publicação:", text=str(book_data['year']))
-        new_pages, ok4 = QInputDialog.getText(None, "Editar Livro", "Nova quantidade de páginas:", text=str(book_data['pages']))
 
+        new_title, ok1 = QInputDialog.getText(None, "Editar Livro", "Novo título:", text=book_data['title'])
+        if not ok1:  # Se o usuário cancelar, interrompe a função
+            return
+
+        new_author, ok2 = QInputDialog.getText(None, "Editar Livro", "Novo autor:", text=book_data['author'])
+        if not ok2:
+            return
+
+        new_year, ok3 = QInputDialog.getText(None, "Editar Livro", "Novo ano de publicação:", text=str(book_data['year']))
+        if not ok3:
+            return
+
+        new_pages, ok4 = QInputDialog.getText(None, "Editar Livro", "Nova quantidade de páginas:", text=str(book_data['pages']))
+        if not ok4:
+            return
+
+        new_title = new_title.strip()
+        new_author = new_author.strip()
+        new_year = new_year.strip()
+        new_pages = new_pages.strip()
+
+        # Agora podemos validar os campos numéricos
         if new_year.isdigit() and new_pages.isdigit():
-            if ok1 and ok2 and ok3 and ok4:
-                success = update_book(book_id, new_title, new_author, new_pages, new_year)
-                if success:
-                    QMessageBox.information(None, 'Sucesso', 'Livro atualizado com sucesso')
-                    self.load_books()
-                else:
-                    QMessageBox.warning(None, 'Erro', 'Erro ao atualizar livro')
+            success = update_book(book_id, new_title, new_author, int(new_pages), int(new_year))
+            if success:
+                QMessageBox.information(None, 'Sucesso', 'Livro atualizado com sucesso')
+                self.load_books()
+            else:
+                QMessageBox.warning(None, 'Erro', 'Erro ao atualizar livro')
         else:
             QMessageBox.warning(None, 'Erro', 'Os campos "Ano" e "Quantidade de Páginas" devem conter apenas números inteiros.')
 

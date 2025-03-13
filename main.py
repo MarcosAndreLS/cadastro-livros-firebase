@@ -87,18 +87,31 @@ class Main(QMainWindow, Ui_Main):
         self.QtStack.setCurrentIndex(0)
 
     def abrirLogin(self):
+        self.loginWindow.line_email.setText('')
+        self.loginWindow.line_senha.setText('')
         self.QtStack.setCurrentIndex(1)
 
     def abrirCadastroUser(self):
+        self.signupWindow.line_email.setText('')
+        self.signupWindow.line_senha.setText('')
+        self.signupWindow.line_csenha.setText('')
         self.QtStack.setCurrentIndex(2)
 
     def abrirLibrary(self):
         self.QtStack.setCurrentIndex(3)
 
     def abrirCadastroLivro(self):
+        self.signupBooksWindow.line_titulo.setText('')
+        self.signupBooksWindow.line_autor.setText('')
+        self.signupBooksWindow.line_Qpaginas.setText('')
+        self.signupBooksWindow.line_publicacao.setText('')
         self.QtStack.setCurrentIndex(4)
 
     def abrirPesquisarLivro(self):
+        self.searchBooksWindow.line_titulo.setText('')
+        self.searchBooksWindow.line_autor.setText('')
+        self.searchBooksWindow.line_Qpaginas.setText('')
+        self.searchBooksWindow.line_publicacao.setText('')
         self.QtStack.setCurrentIndex(5)
         self.library_controller.load_books()
 
