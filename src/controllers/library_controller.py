@@ -19,7 +19,7 @@ class LibraryController:
         if not (title == '' or author == '' or pages == '' or year == ''):
             if pages.isdigit() and year.isdigit():
                 books_data = get_books()
-                books = books_data.get("books", {})  # Evita erro caso a chave não exista
+                books = books_data.get("books", {})
 
                 for book_id, book_data in books.items():
                     if (
@@ -47,15 +47,14 @@ class LibraryController:
         """
         Carrega os livros na interface com rolagem e adiciona botões de edição e exclusão.
         """
-        books_data = get_books()  # Obtém os livros e o tempo da consulta
+        books_data = get_books()
         books = books_data.get("books", {})
         query_time = books_data.get("query_time", None)
 
-        # Limpa a lista antes de adicionar os novos livros
         QMessageBox.information(None, 'Sucesso', f'A consulta para carregar todos os livros levou {query_time:.4f} segundos.')
         self.main.searchBooksWindow.listWidget.clear()
         self._populate_book_list(books)
-    
+
     def search_books(self):
         """
         Realiza a pesquisa diretamente no controller com base nos campos preenchidos.
@@ -65,7 +64,7 @@ class LibraryController:
         year_query = self.main.searchBooksWindow.line_publicacao.text().strip()
         pages_query = self.main.searchBooksWindow.line_Qpaginas.text().strip()
 
-        books_data = get_books()  # Busca todos os livros do Firebase
+        books_data = get_books()
         books = books_data.get("books", {})
 
         results = {}
@@ -86,7 +85,7 @@ class LibraryController:
 
         self.main.searchBooksWindow.listWidget.clear()
         self._populate_book_list(results)
-    
+
     def _populate_book_list(self, books):
         """
         Popula a lista de livros com botões de edição e exclusão.
@@ -96,7 +95,7 @@ class LibraryController:
             main_layout = QVBoxLayout()
             info_layout = QVBoxLayout()
             buttons_layout = QHBoxLayout()
-            
+
             book_info = QLabel(
                 f"Título: {book_data['title']}\n"
                 f"Autor: {book_data['author']}\n"
@@ -126,28 +125,27 @@ class LibraryController:
             self.main.searchBooksWindow.listWidget.addItem(item)
             self.main.searchBooksWindow.listWidget.setItemWidget(item, book_widget)
 
-    
     def edit_book(self, book_id):
         """
         Edita um livro existente.
         """
         books_data = get_books()
-        books = books_data.get("books", {})  # Obtém os livros, evitando erro se a chave não existir
+        books = books_data.get("books", {})
         book_data = books.get(book_id, None)
         if not book_data:
             QMessageBox.warning(None, 'Erro', 'Não foi possível carregar os dados atualizados do livro.')
             return
-        
+
         while True:
             new_title, ok1 = QInputDialog.getText(None, "Editar Livro", "Novo título:", text=book_data['title'])
             if ok1:
-                if new_title == '':  # Se estiver vazio, exibe erro
+                if new_title == '':
                     QMessageBox.warning(None, 'Erro', 'O título não pode estar em branco.')
                 else:
                     break
             else:
                 return
-        
+
         while True:
             new_author, ok2 = QInputDialog.getText(None, "Editar Livro", "Novo autor:", text=book_data['author'])
             if ok2:
@@ -182,7 +180,6 @@ class LibraryController:
         new_year = new_year.strip()
         new_pages = new_pages.strip()
 
-        # Agora podemos validar os campos numéricos
         if new_year.isdigit() and new_pages.isdigit():
             success = update_book(book_id, new_title, new_author, int(new_pages), int(new_year))
             if success:

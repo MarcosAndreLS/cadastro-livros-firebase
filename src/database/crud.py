@@ -1,6 +1,7 @@
 from src.database.firebase_config import db
 import time
 
+
 def add_book(title, author, pages, year):
     """
     Adiciona um novo livro ao Firebase Realtime Database.
@@ -18,26 +19,27 @@ def add_book(title, author, pages, year):
         print(f"Erro ao adicionar livro: {str(e)}")
         return False
 
+
 def get_books():
     """
     Retorna todos os livros cadastrados no Firebase e o tempo de consulta.
     """
     try:
-        start_time = time.time()  # Captura o tempo inicial
+        start_time = time.time()
         books = db.child("books").get().val()
-        end_time = time.time()  # Captura o tempo final
-   
-        elapsed_time = end_time - start_time  # Calcula o tempo decorrido
+        end_time = time.time()
+
+        elapsed_time = end_time - start_time
 
         return {
             "books": books if books else {},
-            "query_time": elapsed_time  # Tempo da consulta em segundos
+            "query_time": elapsed_time
         }
     except Exception as e:
         print(f"Erro ao buscar livros: {str(e)}")
         return {
             "books": {},
-            "query_time": None  # Indica falha na consulta
+            "query_time": None
         }
 
 

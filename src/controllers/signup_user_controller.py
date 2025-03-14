@@ -16,7 +16,7 @@ class SignupController:
 
             if result == "SUCCESS":
                 QMessageBox.information(None, 'Sucesso', 'Conta criada com sucesso!')
-                self.main.QtStack.setCurrentIndex(0)  # Redireciona para a tela principal
+                self.main.QtStack.setCurrentIndex(0)
             elif result == "EMAIL_INVÁLIDO":
                 QMessageBox.warning(None, 'Erro', 'O e-mail fornecido não é válido.')
             elif result == "EMAIL_JÁ_CADASTRADO":
@@ -31,17 +31,3 @@ class SignupController:
                 QMessageBox.critical(None, 'Erro', 'Ocorreu um erro desconhecido ao criar a conta.')
         else:
             QMessageBox.information(None, 'Erro', 'Senhas diferentes')
-            
-        # if password == confirm_password:
-        #     try:
-        #         db.child("users").push({
-        #             "email": email,
-        #             "password": password  # Senha deve ser criptografada
-        #         })
-
-        #         print("Conta criada com sucesso!")
-        #         self.main.QtStack.setCurrentIndex(0)  # Redireciona para a tela principal
-        #     except Exception as e:
-        #         print(f"Erro ao criar conta: {str(e)}")
-        # else:
-        #     self.main.signupWindow.senhas_diferentes.setVisible(True)

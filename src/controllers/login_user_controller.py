@@ -11,9 +11,9 @@ class LoginController:
         password = self.main.loginWindow.line_senha.text()
 
         result = authenticate_user(email, password)
-        
+
         if result == "SUCCESS":
-            self.main.QtStack.setCurrentIndex(3)  # Redireciona para a tela principal
+            self.main.QtStack.setCurrentIndex(3)
             QMessageBox.information(None, 'Sucesso', f'Login bem-sucedido! Bem-vindo, {email}')
         elif result == "EMAIL_INVÁLIDO":
             QMessageBox.warning(None, 'Erro', 'Por favor, digite um email')
@@ -23,17 +23,3 @@ class LoginController:
             QMessageBox.warning(None, 'Erro', 'Credenciais de login inválidas')  
         else:
             QMessageBox.critical(None, 'Erro', 'Ocorreu um erro desconhecido')
-        # try:
-        #     users = db.child("users").get().val()  # Obtém todos os usuários cadastrados
-
-        #     if users:
-        #         for user_id, user_data in users.items():
-        #             if user_data['email'] == email and user_data['password'] == password:
-        #                 print(f"Login bem-sucedido! Bem-vindo, {email}")
-        #                 self.main.QtStack.setCurrentIndex(3)  # Redireciona para a tela principal
-        #                 return
-
-        #     print("Erro: Usuário ou senha incorretos!")
-
-        # except Exception as e:
-        #     print(f"Erro no login: {str(e)}")
