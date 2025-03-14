@@ -137,38 +137,45 @@ class LibraryController:
         if not book_data:
             QMessageBox.warning(None, 'Erro', 'Não foi possível carregar os dados atualizados do livro.')
             return
-
-        new_title, ok1 = QInputDialog.getText(None, "Editar Livro", "Novo título:", text=book_data['title'])
-        if ok1:
-            if new_title == '':  # Se estiver vazio, exibe erro
-                QMessageBox.warning(None, 'Erro', 'O título não pode estar em branco.')
+        
+        while True:
+            new_title, ok1 = QInputDialog.getText(None, "Editar Livro", "Novo título:", text=book_data['title'])
+            if ok1:
+                if new_title == '':  # Se estiver vazio, exibe erro
+                    QMessageBox.warning(None, 'Erro', 'O título não pode estar em branco.')
+                else:
+                    break
+            else:
                 return
-        else:
-            return
-
-        new_author, ok2 = QInputDialog.getText(None, "Editar Livro", "Novo autor:", text=book_data['author'])
-        if ok2:
-            if new_author == '':
-                QMessageBox.warning(None, 'Erro', 'O autor não pode estar em branco.')
+        
+        while True:
+            new_author, ok2 = QInputDialog.getText(None, "Editar Livro", "Novo autor:", text=book_data['author'])
+            if ok2:
+                if new_author == '':
+                    QMessageBox.warning(None, 'Erro', 'O autor não pode estar em branco.')
+                else:
+                    break
+            else:
                 return
-        else:
-            return
 
-        new_year, ok3 = QInputDialog.getText(None, "Editar Livro", "Novo ano de publicação:", text=str(book_data['year']))
-        if ok3:
-            if new_year == '':
-                QMessageBox.warning(None, 'Erro', 'O ano de publicação não pode estar em branco.')
+        while True:
+            new_year, ok3 = QInputDialog.getText(None, "Editar Livro", "Novo ano de publicação:", text=str(book_data['year']))
+            if ok3:
+                if new_year == '':
+                    QMessageBox.warning(None, 'Erro', 'O ano de publicação não pode estar em branco.')
+                else:
+                    break
+            else:
                 return
-        else:
-            return
-
-        new_pages, ok4 = QInputDialog.getText(None, "Editar Livro", "Nova quantidade de páginas:", text=str(book_data['pages']))
-        if ok4:
-            if new_pages == '':
-                QMessageBox.warning(None, 'Erro', 'A quantidade de páginas não pode estar em branco.')
+        while True:
+            new_pages, ok4 = QInputDialog.getText(None, "Editar Livro", "Nova quantidade de páginas:", text=str(book_data['pages']))
+            if ok4:
+                if new_pages == '':
+                    QMessageBox.warning(None, 'Erro', 'A quantidade de páginas não pode estar em branco.')
+                else:  
+                    break
+            else:
                 return
-        else:
-            return
 
         new_title = new_title.strip()
         new_author = new_author.strip()
