@@ -15,13 +15,13 @@ def authenticate_user(email, password):
         return "SUCCESS"  # Credenciais incorretas
     except Exception as e:
         error_message = str(e)
-
+        print(e)
         if "INVALID_EMAIL" in error_message:
             return "EMAIL_INVÁLIDO"
         elif "MISSING_PASSWORD" in error_message:
             return "SENHA_AUSENTE"
         elif "INVALID_LOGIN_CREDENTIALS" in error_message:
-            return "SENHA_INVÁLIDA"
+            return "CREDENCIAIS_INVÁLIDAS"
         else:
             return "ERRO_DESCONHECIDO"
 

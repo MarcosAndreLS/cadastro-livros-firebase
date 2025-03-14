@@ -19,8 +19,8 @@ class LoginController:
             QMessageBox.warning(None, 'Erro', 'Por favor, digite um email')
         elif result == "SENHA_AUSENTE":
             QMessageBox.warning(None, 'Erro', 'Por favor, digite uma senha.')
-        elif result == "SENHA_INVÁLIDA":
-            QMessageBox.warning(None, 'Erro', 'Senha incorreta!')  
+        elif result == "CREDENCIAIS_INVÁLIDAS":
+            QMessageBox.warning(None, 'Erro', 'Credenciais de login inválidas')  
         else:
             QMessageBox.critical(None, 'Erro', 'Ocorreu um erro desconhecido')
         # try:
