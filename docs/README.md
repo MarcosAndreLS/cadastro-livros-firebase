@@ -38,30 +38,31 @@ pip install -r requirements.txt
 cadastro-livros-firebase/
     |
     |--- docs/
-        README.md # documentação do projeto
+    |    |--- README.md # documentação do projeto
     |
     |--- src/
-        |
-        |--- controllers/
-            library_controller.py # 
-            login_user_controller.py
-            signup_user_controller.py
-        |--- database/
-            auth.py
-            crud.py            
-            firebase_config.py # credenciais do firebase
-        |
-        |--- gui/
-            |
-            |--- ui/
-            library.py
-            login_window.py
-            main_window.py
-            search_books_window.py
-            sign_up_books_window.py
-            sign_up_window.py
-    main.py
-    requirements.txt
+    |    |
+    |    |--- controllers/
+    |    |   |--- library_controller.py # 
+    |    |   |--- login_user_controller.py
+    |    |   |--- signup_user_controller.py
+    |    |
+    |    |--- database/
+    |    |   |--- auth.py # responsável pela autenticação
+    |    |   |--- crud.py # responsável por fazer o CRUD           
+    |    |   |--- firebase_config.py # credenciais do firebase
+    |    |
+    |    |--- gui/ # interfaces gráficas
+    |        |--- ui/
+    |        |
+    |        |--- library.py
+    |        |--- login_window.py
+    |        |--- main_window.py
+    |        |--- search_books_window.py
+    |        |--- sign_up_books_window.py
+    |        |--- sign_up_window.py
+    |--- main.py
+    |--- requirements.txt
 ```
 
 ### Executando a aplicação
