@@ -150,10 +150,23 @@ A tela de cadastro de livro contém os campos de título do livro, nome do autor
 A tela de pesquisar os livros, mostra todos os livros cadastrados juntamente com as opções de editar e excluir o livro correspondente. Além disso, existem campos de pesquisa, caso seja inserido algum dado, será pesquisado e retornado o resultado após apertar o botão de buscar.
 |
 |--- Caso queira excluir o livro, será mostrado um "Message Box" com as opções de sim e não. Caso seja escolhido a opção sim, o livro será excluído. Após isso, será mostrado um "Message Box" informando que o livro foi excluído com sucesso.
+|--- Caso queira editar o livro, será mostrado um "Input Dialog" para cada campo do livro para edição. Caso os campos estejam vazios, ficará em looping até ser preenchido ou cancelado a operação.
+|--- Caso o livro seja editado com sucesso, será mostrado um "Message Box" que o livro foi editado com sucesso.
 ```
 ![image](https://github.com/user-attachments/assets/e55a709c-9e62-4033-a023-452ff1612530)
-
 ![image](https://github.com/user-attachments/assets/e93c337a-a2fc-42e0-88a6-6be45ad1b1c3)
+![image](https://github.com/user-attachments/assets/cd212df6-b0a1-4f70-8c61-e5b090235aac)
+![image](https://github.com/user-attachments/assets/6641c3f7-a36c-41cc-a1c1-a11aa6ccac93)
+![image](https://github.com/user-attachments/assets/178812cf-7fbf-48f6-9f3c-ddfccfa802f3)
+![image](https://github.com/user-attachments/assets/757730a8-ed0b-4e5f-bc71-7c3195685f91)
+![image](https://github.com/user-attachments/assets/977420a0-7c46-4fe7-866c-2b1bf6b1eda8)
+![image](https://github.com/user-attachments/assets/3fbd1c67-bd1b-4672-b4e1-f89a225c4e13)
+
+
+
+
+
+
 
 
 
