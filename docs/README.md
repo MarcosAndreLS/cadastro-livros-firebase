@@ -149,9 +149,19 @@ A tela de cadastro de livro contém os campos de título do livro, nome do autor
 
 
 A tela de pesquisar os livros, mostra todos os livros cadastrados juntamente com as opções de editar e excluir o livro correspondente. Além disso, existem campos de pesquisa, caso seja inserido algum dado, será pesquisado e retornado o resultado após apertar o botão de buscar.
-
-- Caso queira excluir o livro, será mostrado um "Message Box" com as opções de sim e não. Caso seja escolhido a opção sim, o livro será excluído. Após isso, será mostrado um "Message Box" informando que o livro foi excluído com sucesso.
-
+|
+|--- Caso queira excluir o livro, será mostrado um "Message Box" com as opções de sim e não. Caso seja escolhido a opção sim, o livro será excluído. Após isso, será mostrado um "Message Box" informando que o livro foi excluído com sucesso.
+```
 ![image](https://github.com/user-attachments/assets/e55a709c-9e62-4033-a023-452ff1612530)
-
 ![image](https://github.com/user-attachments/assets/e93c337a-a2fc-42e0-88a6-6be45ad1b1c3)
+
+
+
+
+
+
+
+
+
+
+
